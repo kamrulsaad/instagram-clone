@@ -73,8 +73,4 @@ router.post('/signin', (req, res) => {
 
 })
 
-router.get("/protected",requireLogin, (req, res) => {
-    res.send("hello there")
-})
-
 module.exports = router
