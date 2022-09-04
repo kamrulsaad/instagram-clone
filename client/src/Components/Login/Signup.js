@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const Signup = () => {
     return (
         <div className="relative">
             <img
@@ -14,17 +14,17 @@ const Login = () => {
                     <div className="flex flex-col items-center justify-between xl:flex-row">
                         <div className="w-full max-w-xl mb-12 xl:mb-0 xl:pr-16 xl:w-7/12">
                             <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl sm:leading-none">
-                                Join now to get a real life social media experience. Its never too late to get connected with the world  
+                                Join now to get a real life social media experience. Its never too late to get connected with the world
                             </h2>
                             <p className="max-w-xl mb-4 text-base text-gray-400 md:text-lg">
-                                Dont have an account?
+                                Already registered?
                             </p>
                             <Link
-                                to="/signup"
+                                to="/signin"
                                 aria-label=""
                                 className="inline-flex items-center font-semibold tracking-wider transition-colors duration-200 text-teal-accent-400 hover:text-teal-accent-700"
                             >
-                                Sign up today
+                                Log in to your account
                                 <svg
                                     className="inline-block w-3 ml-2"
                                     fill="currentColor"
@@ -37,9 +37,24 @@ const Login = () => {
                         <div className="w-full max-w-xl xl:px-8 xl:w-5/12">
                             <div className="bg-white rounded shadow-2xl p-7 sm:p-10">
                                 <h3 className="mb-4 text-xl font-semibold sm:text-center sm:mb-6 sm:text-2xl">
-                                    Sign in
+                                    Register
                                 </h3>
                                 <form>
+                                    <div className="mb-1 sm:mb-2">
+                                        <label
+                                            htmlFor="username"
+                                            className="inline-block mb-1 font-medium"
+                                        >
+                                            Username
+                                        </label>
+                                        <input
+                                            required
+                                            type="username"
+                                            className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                                            id="username"
+                                            name="username"
+                                        />
+                                    </div>
                                     <div className="mb-1 sm:mb-2">
                                         <label
                                             htmlFor="email"
@@ -88,8 +103,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 
-export default Login;
+export default Signup;

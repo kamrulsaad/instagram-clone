@@ -1,12 +1,12 @@
 import { useState } from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export const Nav = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <div class="bg-gray-900 sticky top-0 ">
+        <div class="bg-gray-900 sticky top-0 z-50">
             <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
                 <div class="relative flex items-center justify-between">
                     <div class="flex items-center">
@@ -14,14 +14,14 @@ export const Nav = () => {
                             href="/"
                             aria-label="Instagram"
                             title="Instagram"
-                            class="inline-flex items-center mr-8">   
+                            class="inline-flex items-center mr-8">
                             <img className="w-10" src="assets/logo.png" alt="" />
                             <span class="ml-2 grand-hotel text-3xl font-bold tracking-wide text-gray-100">
                                 Instagram
                             </span>
                         </a>
                         <ul class="items-center hidden space-x-8 lg:flex">
-                            
+
                         </ul>
                     </div>
                     <ul class="items-center hidden space-x-8 lg:flex">
@@ -36,14 +36,14 @@ export const Nav = () => {
                             </Link>
                         </li>
                         <li>
-                            <a
-                                href="/"
+                            <Link
+                                to="/signup"
                                 class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                                 aria-label="Sign up"
                                 title="Sign up"
                             >
                                 Sign up
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     <div class="lg:hidden">
@@ -81,7 +81,7 @@ export const Nav = () => {
                                             >
                                                 <img className="w-10" src="assets/logo.png" alt="" />
                                                 <span class="ml-2 grand-hotel text-2xl font-bold tracking-wide text-gray-800">
-                                                   Instagram
+                                                    Instagram
                                                 </span>
                                             </a>
                                         </div>
@@ -105,7 +105,6 @@ export const Nav = () => {
                                         <ul class="space-y-4">
                                             <li>
                                                 <Link to='/signin'
-                                                    href="/"
                                                     aria-label="Sign in"
                                                     title="Sign in"
                                                     class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -114,14 +113,14 @@ export const Nav = () => {
                                                 </Link>
                                             </li>
                                             <li>
-                                                <a
-                                                    href="/"
+                                                <Link
+                                                    to="/signup"
                                                     class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                                                     aria-label="Sign up"
                                                     title="Sign up"
                                                 >
                                                     Sign up
-                                                </a>
+                                                </Link>
                                             </li>
                                         </ul>
                                     </nav>
