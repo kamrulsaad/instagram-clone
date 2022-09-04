@@ -8,7 +8,7 @@ import React from 'react'
 
 const Post = () => {
     return (
-        <div className='max-w-md my-3 rounded-lg bg-white mx-auto border border-slate-400'>
+        <div className='max-w-md my-3 rounded-lg bg-white border border-slate-300'>
             <div className='flex justify-between p-4 items-center '>
                 <div className='flex items-center gap-3'>
                     <img className='w-10 h-10 rounded-full object-cover' src="https://th.bing.com/th/id/OIP.2wcEIWqAbgR49geWjqZG9wHaJ3?pid=ImgDet&w=446&h=594&rs=1" alt="" />

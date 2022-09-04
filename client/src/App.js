@@ -6,7 +6,7 @@ import Home from "./Components/Home/Home";
 
 function App() {
   return (
-    <div className="bg-slate-200">
+    <div className="bg-slate-50">
       <Nav></Nav>
       <Routes>
         <Route index element={<Home></Home>}></Route>
