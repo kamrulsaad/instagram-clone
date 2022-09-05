@@ -10,8 +10,7 @@ export const Nav = () => {
             <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
                 <div class="relative flex items-center justify-between">
                     <div class="flex items-center">
-                        <a
-                            href="/"
+                        <Link to="/"
                             aria-label="Instagram"
                             title="Instagram"
                             class="inline-flex items-center mr-8">
@@ -19,7 +18,7 @@ export const Nav = () => {
                             <span class="ml-2 grand-hotel text-3xl font-bold tracking-wide text-gray-100">
                                 Instagram
                             </span>
-                        </a>
+                        </Link>
                         <ul class="items-center hidden space-x-8 lg:flex">
 
                         </ul>
@@ -73,8 +72,7 @@ export const Nav = () => {
                                 <div class="p-5 bg-white border rounded shadow-sm">
                                     <div class="flex items-center justify-between mb-4">
                                         <div>
-                                            <a
-                                                href="/"
+                                            <Link to="/"
                                                 aria-label="Company"
                                                 title="Company"
                                                 class="inline-flex items-center"
@@ -83,7 +81,7 @@ export const Nav = () => {
                                                 <span class="ml-2 grand-hotel text-2xl font-bold tracking-wide text-gray-800">
                                                     Instagram
                                                 </span>
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div>
                                             <button

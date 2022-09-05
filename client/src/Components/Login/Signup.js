@@ -1,7 +1,88 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { toast } from 'react-toastify';
+import {useNavigate} from 'react-router-dom'
+import LoopIcon from '@mui/icons-material/Loop';
 
 const Signup = () => {
+
+    const [image, setImage] = useState(null)
+    const [imgURL, setImgURL] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const navigate = useNavigate()
+
+    const imageInput = e => {
+        if (imgURL) {
+            URL.revokeObjectURL(imgURL)
+        }
+        const file = e.target.files[0]
+        setImage(file)
+        const url = URL.createObjectURL(file)
+        setImgURL(url)
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+
+        setLoading(true)
+
+        if (!image || !e.target.username.value
+            || !e.target.password.value
+            || !e.target.full_name.value) {
+            return toast.warning("Please provide all the fields")
+        }
+        else {
+            const imgbbAPIkey = '74922ada22c311f177ebbc5022b4cfed';
+            const url = `https://api.imgbb.com/1/upload?key=${imgbbAPIkey}`
+            const formData = new FormData();
+            formData.append('image', image);
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res => {
+                    const url = res.data.url
+
+                    const myHeaders = new Headers();
+                    myHeaders.append("Content-Type", "application/json");
+
+                    const raw = JSON.stringify({
+                        "username": e.target.username.value,
+                        "password": e.target.password.value,
+                        "profile_picture": url,
+                        "full_name": e.target.full_name.value
+                    });
+
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: myHeaders,
+                        body: raw,
+                        redirect: 'follow'
+                    };
+
+                    fetch("http://localhost:5000/signup", requestOptions)
+                        .then(response => response.json())
+                        .then(result => {
+                            console.log(result);
+                            if(result.error){
+                                toast.error(result.error)
+                            }
+                            else{
+                                toast.success(result.message)
+                                navigate('/signin')
+                            }
+                            setLoading(false)
+                        })
+
+
+                })
+        }
+
+    }
+
     return (
         <div className="relative">
             <img
@@ -39,7 +120,7 @@ const Signup = () => {
                                 <h3 className="mb-4 text-xl font-semibold sm:text-center sm:mb-6 sm:text-2xl">
                                     Register
                                 </h3>
-                                <form>
+                                <form noValidate onSubmit={handleSubmit}>
                                     <div className="mb-1 sm:mb-2">
                                         <label
                                             htmlFor="username"
@@ -49,7 +130,7 @@ const Signup = () => {
                                         </label>
                                         <input
                                             required
-                                            type="username"
+                                            type="text"
                                             className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                                             id="username"
                                             name="username"
@@ -57,17 +138,17 @@ const Signup = () => {
                                     </div>
                                     <div className="mb-1 sm:mb-2">
                                         <label
-                                            htmlFor="email"
+                                            htmlFor="full_name"
                                             className="inline-block mb-1 font-medium"
                                         >
-                                            Email
+                                            Full Name
                                         </label>
                                         <input
                                             required
-                                            type="email"
+                                            type="text"
                                             className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                                            id="email"
-                                            name="email"
+                                            id="full_name"
+                                            name="full_name"
                                         />
                                     </div>
                                     <div className="mb-1 sm:mb-2">
@@ -85,12 +166,32 @@ const Signup = () => {
                                             name="password"
                                         />
                                     </div>
+                                    <div className="mb-1 sm:mb-2 flex">
+                                        <label
+                                            htmlFor="profile_picture"
+                                            className="mb-1 w-32 h-32 flex justify-center items-center border-2 cursor-pointer rounded-lg"
+                                        >
+                                            <AddCircleIcon />
+                                        </label>
+                                        <input
+                                            required
+                                            type="file"
+                                            onChange={imageInput}
+                                            accept='image/*'
+                                            className="hidden"
+                                            id="profile_picture"
+                                            name="profile_picture"
+                                        />
+                                        {
+                                            imgURL && <img className='w-32 h-32 rounded-lg ml-2 object-cover' src={imgURL} alt='' />
+                                        }
+                                    </div>
                                     <div className="mt-4 mb-2 sm:mb-4">
                                         <button
                                             type="submit"
                                             className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                                         >
-                                            Login
+                                            Sign Up {loading && <LoopIcon className='animate-spin ml-2' ></LoopIcon>}
                                         </button>
                                     </div>
                                     <p className="text-xs text-gray-600 sm:text-sm">
