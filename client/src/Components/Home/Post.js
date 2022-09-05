@@ -7,12 +7,34 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import React, { useState } from 'react'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Post = ({ post }) => {
 
     const [liked, setLiked] = useState(post.user_has_liked)
     const [save, setSave] = useState(false)
     const [likes, setLikes] = useState(post.likes_count)
+    const [comment, setComment] = useState('')
+    const [comments, setComments] = useState(post.comments)
+
+    const navigate = useNavigate()
+
+    const user = JSON.parse(localStorage.getItem("user"))
+
+    const addComment = (e) => {
+        e.preventDefault()
+
+        if (!user) {
+            return navigate('/signin')
+        }
+        const newComment = {
+            username : user.full_name,
+            comment
+        }
+        setComments([...comments, newComment])
+        e.target.reset()
+    }
+
 
     return (
         <div className='max-w-md my-3 md:rounded-lg bg-white border border-slate-300'>
@@ -38,7 +60,9 @@ const Post = ({ post }) => {
                         setLikes(liked ? likes - 1 : likes + 1)
                     }} className='cursor-pointer'>
                         {
-                            liked ? <FavoriteIcon className='text-red-500'></FavoriteIcon> : <FavoriteBorderIcon></FavoriteBorderIcon>
+                            user ?
+                                (liked ? <FavoriteIcon className='text-red-500'></FavoriteIcon> : <FavoriteBorderIcon></FavoriteBorderIcon>)
+                                : <Link to={'signin'}><FavoriteBorderIcon></FavoriteBorderIcon></Link>
                         }
                     </div>
                     <div className='cursor-pointer'>
@@ -50,7 +74,9 @@ const Post = ({ post }) => {
                 </div>
                 <div onClick={() => setSave(!save)} className='cursor-pointer'>
                     {
-                        save ? <BookmarkIcon></BookmarkIcon> : <BookmarkBorderIcon></BookmarkBorderIcon>
+                        user ?
+                            (save ? <BookmarkIcon></BookmarkIcon> : <BookmarkBorderIcon></BookmarkBorderIcon>)
+                            : <Link to={'signin'}><BookmarkBorderIcon></BookmarkBorderIcon></Link>
                     }
                 </div>
             </div>
@@ -58,19 +84,24 @@ const Post = ({ post }) => {
                 <p className='font-medium text-sm'>{likes} Likes </p>
                 <p className='text-sm'>
                     <span className='font-medium'>{post.caption.from.full_name} </span>
+                    {
+                        post?.tags?.map((tag, index) => <span className='font-semibold text-sky-500 mr-1 cursor-pointer' key={index}>#{tag}</span>)
+                    }
                     {post.caption.text}
                 </p>
                 <p className='text-gray-400 text-xs py-1'>100 comments</p>
-                <p className='text-sm'>
-                    <span className='font-medium'>username </span>
-                    Nice Pic
-                </p>
+                {
+                    comments?.map((c, index) => <p key={index} className='text-sm'>
+                        <span className='font-medium mr-1'>{c.username}</span>
+                        {c.comment}
+                    </p>)
+                }
             </div>
             <hr />
-            <form className='p-3 flex gap-2'>
+            <form className='p-3 flex gap-2' onSubmit={addComment} >
                 <SentimentSatisfiedAltIcon></SentimentSatisfiedAltIcon>
-                <input type="text" className='border-b w-full border-sky-200 focus:border-sky-400 focus:outline-none texxt-sm' />
-                <button className='text-sky-600 text-sm font-medium' type='submit'>Post</button>
+                <input onChange={(e) => setComment(e.target.value)} type="text" className='border-b w-full border-sky-200 focus:border-sky-400 focus:outline-none text-sm' />
+                <button disabled={!comment} className='text-sky-600 disabled:cursor-not-allowed transition-all duration-300 disabled:text-sky-200 text-sm font-medium' type='submit'>Post</button>
             </form>
         </div>
     );
