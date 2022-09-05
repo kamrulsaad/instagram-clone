@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
+import HomeIcon from '@mui/icons-material/Home';
+import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import SearchIcon from '@mui/icons-material/Search';
+import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 
 export const Nav = () => {
 
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [user, setUser] = useState(null)
+
+    const localUser = localStorage.getItem("user")
+
+    useEffect(() => {
+        setUser(localUser)
+    },[localUser])
+
 
     return (
         <div className="bg-gray-900 sticky top-0 z-50">
@@ -19,31 +32,53 @@ export const Nav = () => {
                                 Instagram
                             </span>
                         </Link>
-                        <ul className="items-center hidden space-x-8 lg:flex">
-
+                        <ul className="items-center relative hidden space-x-8 lg:flex">
+                            <SearchIcon className="absolute left-10 text-gray-500 scale-75 mt-1"></SearchIcon>
+                            <input type="text" className="w-60 rounded-xl text-sm p-2 pl-10 focus:outline-none" placeholder="Search" />
                         </ul>
                     </div>
                     <ul className="items-center hidden space-x-8 lg:flex">
-                        <li>
-                            <Link
-                                to="/signin"
-                                aria-label="Sign in"
-                                title="Sign in"
-                                className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-                            >
-                                Sign in
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/signup"
-                                className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                                aria-label="Sign up"
-                                title="Sign up"
-                            >
-                                Sign up
-                            </Link>
-                        </li>
+                        {
+                            user ? <>
+                                <li className="text-white scale-125 cursor-pointer">
+                                    <HomeIcon></HomeIcon>
+                                </li>
+                                <li className="text-white scale-125 cursor-pointer">
+                                    <AddToPhotosIcon></AddToPhotosIcon>
+                                </li>
+                                <li className="text-white scale-125 cursor-pointer">
+                                    <NotificationsNoneIcon></NotificationsNoneIcon>
+                                </li>
+                                <li className="text-white scale-125 cursor-pointer">
+                                    <MarkEmailUnreadIcon></MarkEmailUnreadIcon>
+                                </li>
+                                <li>
+                                    <img className="w-10 rounded-full h-10 object-cover" src={user.profile_picture} alt="" />
+                                </li>
+                            </> :
+                                <>
+                                    <li>
+                                        <Link
+                                            to="/signin"
+                                            aria-label="Sign in"
+                                            title="Sign in"
+                                            className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                                        >
+                                            Sign in
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="/signup"
+                                            className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                            aria-label="Sign up"
+                                            title="Sign up"
+                                        >
+                                            Sign up
+                                        </Link>
+                                    </li>
+                                </>
+                        }
                     </ul>
                     <div className="lg:hidden">
                         <button
@@ -100,28 +135,47 @@ export const Nav = () => {
                                         </div>
                                     </div>
                                     <nav>
-                                        <ul className="space-y-4">
-                                            <li>
-                                                <Link to='/signin'
-                                                    aria-label="Sign in"
-                                                    title="Sign in"
-                                                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                                                >
-                                                    Sign in
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link
-                                                    to="/signup"
-                                                    className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                                                    aria-label="Sign up"
-                                                    title="Sign up"
-                                                >
-                                                    Sign up
-                                                </Link>
-                                            </li>
+                                        <ul className={`space-y-4 ${user && "flex justify-between items-center"}`}>
+                                            {
+                                                user ? <>
+                                                    <li className="cursor-pointer mt-4">
+                                                        <HomeIcon></HomeIcon>
+                                                    </li>
+                                                    <li className="cursor-pointer">
+                                                        <AddToPhotosIcon></AddToPhotosIcon>
+                                                    </li>
+                                                    <li className="cursor-pointer">
+                                                        <NotificationsNoneIcon></NotificationsNoneIcon>
+                                                    </li>
+                                                    <li className="cursor-pointer">
+                                                        <MarkEmailUnreadIcon></MarkEmailUnreadIcon>
+                                                    </li>
+                                                    <li>
+                                                        <img className="w-10 rounded-full h-10 object-cover" src={user.profile_picture} alt="" />
+                                                    </li>
+                                                </> : <><li>
+                                                    <Link to='/signin'
+                                                        aria-label="Sign in"
+                                                        title="Sign in"
+                                                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                                                    >
+                                                        Sign in
+                                                    </Link>
+                                                </li>
+                                                    <li>
+                                                        <Link
+                                                            to="/signup"
+                                                            className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                                            aria-label="Sign up"
+                                                            title="Sign up"
+                                                        >
+                                                            Sign up
+                                                        </Link>
+                                                    </li></>
+                                            }
                                         </ul>
                                     </nav>
+                                    <Link to='/friends' className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md mt-3 bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">Suggested friends</Link>
                                 </div>
                             </div>
                         )}

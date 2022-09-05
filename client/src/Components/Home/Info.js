@@ -1,17 +1,17 @@
 import React from 'react';
 import User from './User';
 
-const Info = () => {
+const Info = ({route}) => {
 
     const user = JSON.parse(localStorage.getItem("user"))
 
     return (
-        <div className='max-w-sm sticky top-[100px] hidden md:block w-full my-5 p-4 h-fit rounded-lg bg-white border border-slate-300'>
+        <div className={`max-w-sm sticky top-[100px] ${!route && 'hidden'} mx-auto md:mx-0 md:block w-full my-5 p-4 h-fit md:rounded-lg bg-white border border-slate-300`}>
             {user && <div className='flex gap-3 items-center'>
                 <img className='w-16 rounded-full object-cover h-16' src={user.profile_picture} alt="" />
                 <div>
                     <p className='font-medium'>{user.full_name}</p>
-                    <p className=' text-gray-400 text-sm'>@ {user.username}</p>
+                    <p className=' text-gray-600 text-sm'>@{user.username}</p>
                 </div>
             </div>}
             <div>
