@@ -2,7 +2,7 @@ import React from 'react';
 
 const Info = () => {
     return (
-        <div className='max-w-sm sticky top-[100px] w-full my-5 p-4 h-fit rounded-lg bg-white border border-slate-300'>
+        <div className='max-w-sm sticky top-[100px] hidden md:block w-full my-5 p-4 h-fit rounded-lg bg-white border border-slate-300'>
             <div className='flex gap-3 items-center'>
                 <img className='w-16 rounded-full object-cover h-16' src="https://th.bing.com/th/id/OIP.2wcEIWqAbgR49geWjqZG9wHaJ3?pid=ImgDet&w=446&h=594&rs=1" alt="" />
                 <div>

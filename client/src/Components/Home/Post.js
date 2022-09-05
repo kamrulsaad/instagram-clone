@@ -4,17 +4,26 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import SendIcon from '@mui/icons-material/Send';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-import React from 'react'
+import React, { useState } from 'react'
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
-const Post = () => {
+const Post = ({ post }) => {
+
+    const [liked, setLiked] = useState(post.user_has_liked)
+    const [save, setSave] = useState(false)
+    const [likes, setLikes] = useState(post.likes_count)
+
+    console.log(post.caption.text)
+
     return (
-        <div className='max-w-md my-3 rounded-lg bg-white border border-slate-300'>
+        <div className='max-w-md my-3 md:rounded-lg bg-white border border-slate-300'>
             <div className='flex justify-between p-4 items-center '>
                 <div className='flex items-center gap-3'>
-                    <img className='w-10 h-10 rounded-full object-cover' src="https://th.bing.com/th/id/OIP.2wcEIWqAbgR49geWjqZG9wHaJ3?pid=ImgDet&w=446&h=594&rs=1" alt="" />
+                    <img className='w-10 h-10 rounded-full object-cover' src={post.user.profile_picture} alt="" />
                     <div>
-                        <p className='font-bold text-sm'>Username</p>
-                        <p className='text-xs'>Username</p>
+                        <p className='font-bold text-sm'>{post.user.full_name}</p>
+                        <p className='text-xs cursor-pointer'>@{post.user.username}</p>
                     </div>
                 </div>
                 <div className='text-black'>
@@ -22,12 +31,17 @@ const Post = () => {
                 </div>
             </div>
             <div>
-                <img className='w-full' src="https://sm.askmen.com/t/askmen_in/article/f/facebook-p/facebook-profile-picture-affects-chances-of-gettin_fr3n.1200.jpg" alt="" />
+                <img className='w-full' src={post.images.standard_resolution.url} alt="" />
             </div>
             <div className="flex justify-between items-center p-2">
                 <div className="flex items-center gap-2">
-                    <div className='cursor-pointer'>
-                        <FavoriteBorderIcon></FavoriteBorderIcon>   
+                    <div onClick={() => {
+                        setLiked(!liked)
+                        setLikes(liked ? likes - 1 : likes + 1)
+                    }} className='cursor-pointer'>
+                        {
+                            liked ? <FavoriteIcon className='text-red-500'></FavoriteIcon> : <FavoriteBorderIcon></FavoriteBorderIcon>
+                        }
                     </div>
                     <div className='cursor-pointer'>
                         <ChatBubbleOutlineIcon></ChatBubbleOutlineIcon>
@@ -36,15 +50,17 @@ const Post = () => {
                         <SendIcon></SendIcon>
                     </div>
                 </div>
-                <div className='cursor-pointer'>
-                    <BookmarkBorderIcon></BookmarkBorderIcon>
+                <div onClick={() => setSave(!save)} className='cursor-pointer'>
+                    {
+                        save ? <BookmarkIcon></BookmarkIcon> : <BookmarkBorderIcon></BookmarkBorderIcon>
+                    }
                 </div>
             </div>
             <div className='p-3'>
-                <p className='font-medium text-sm'>1,000 Likes </p>
+                <p className='font-medium text-sm'>{likes} Likes </p>
                 <p className='text-sm'>
-                    <span className='font-medium'>username </span>
-                    Nice Pic
+                    <span className='font-medium'>{post.caption.from.full_name} </span>
+                    {post.caption.text}
                 </p>
                 <p className='text-gray-400 text-xs py-1'>100 comments</p>
                 <p className='text-sm'>
