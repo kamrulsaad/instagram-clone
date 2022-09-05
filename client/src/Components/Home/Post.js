@@ -14,8 +14,6 @@ const Post = ({ post }) => {
     const [save, setSave] = useState(false)
     const [likes, setLikes] = useState(post.likes_count)
 
-    console.log(post.caption.text)
-
     return (
         <div className='max-w-md my-3 md:rounded-lg bg-white border border-slate-300'>
             <div className='flex justify-between p-4 items-center '>
