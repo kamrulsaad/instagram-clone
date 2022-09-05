@@ -8,7 +8,7 @@ const Posts = () => {
     useEffect(() => {
         fetch('http://localhost:5000/insta_posts')
             .then(res => res.json())
-            .then(res => setPosts(res.data))
+            .then(res => setPosts(res.data.reverse()))
     }, [])
 
     return (

@@ -16,8 +16,7 @@ router.get('/insta_posts', (req, res) => {
     })
 })
 
-router.post('/createPost', requireLogin, (req, res) => {
-    
+router.post('/createPost', (req, res) => {  
     const post = new Post(req.body)
     post.save().then(result => {
         res.json({post: result})

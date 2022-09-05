@@ -89,7 +89,7 @@ const Post = ({ post }) => {
                     }
                     {post.caption.text}
                 </p>
-                <p className='text-gray-400 text-xs py-1'>100 comments</p>
+                <p className='text-gray-400 text-xs py-1'>{comments.length} comments</p>
                 {
                     comments?.map((c, index) => <p key={index} className='text-sm'>
                         <span className='font-medium mr-1'>{c.username}</span>

@@ -42,6 +42,16 @@ router.post('/signup', (req, res) => {
         })
 })
 
+router.get('/allUsers', (req, res) => {
+    User.find()
+    .then(users => {
+        for(const user of users){
+            user.password = undefined
+        }
+        res.json(users)
+    })
+})
+
 router.post('/signin', (req, res) => {
     const {username, password} = req.body;
     if(!username || !password){
