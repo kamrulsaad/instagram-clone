@@ -3,8 +3,8 @@ const express = require('express')
 const app = express()
 const PORT = 5000
 const mongoose = require('mongoose')
-const {MONGOURI} = require('./keys')
-const cors = require('cors') 
+const { MONGOURI } = require('./keys')
+const cors = require('cors')
 
 mongoose.connect(MONGOURI)
 

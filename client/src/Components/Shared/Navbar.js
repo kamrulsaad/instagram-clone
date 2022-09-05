@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom"
 import HomeIcon from '@mui/icons-material/Home';
 import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
@@ -9,14 +9,8 @@ import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 export const Nav = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const [user, setUser] = useState(null)
 
-    const localUser = localStorage.getItem("user")
-
-    useEffect(() => {
-        setUser(localUser)
-    },[localUser])
-
+    const user = JSON.parse(localStorage.getItem("user"))
 
     return (
         <div className="bg-gray-900 sticky top-0 z-50">
@@ -53,7 +47,7 @@ export const Nav = () => {
                                     <MarkEmailUnreadIcon></MarkEmailUnreadIcon>
                                 </li>
                                 <li>
-                                    <img className="w-10 rounded-full h-10 object-cover" src={user.profile_picture} alt="" />
+                                    <img className="w-10 rounded-full h-10 object-cover" src={user?.profile_picture} alt="" />
                                 </li>
                             </> :
                                 <>

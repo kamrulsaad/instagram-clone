@@ -1,4 +1,3 @@
-import { Nav } from "./Components/Shared/Navbar";
 import { Routes, Route } from "react-router-dom"
 import Login from "./Components/Login/Login";
 import Signup from "./Components/Login/Signup";
@@ -8,9 +7,9 @@ import { Slide, ToastContainer } from "react-toastify";
 import Info from "./Components/Home/Info";
 
 function App() {
+
   return (
     <div className="bg-slate-50">
-      <Nav></Nav>
       <Routes>
         <Route index element={<Home></Home>}></Route>
         <Route path="/signin" element={<Login></Login>}></Route>

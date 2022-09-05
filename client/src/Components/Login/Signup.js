@@ -66,7 +66,6 @@ const Signup = () => {
                     fetch("http://localhost:5000/signup", requestOptions)
                         .then(response => response.json())
                         .then(result => {
-                            console.log(result);
                             if(result.error){
                                 toast.error(result.error)
                             }

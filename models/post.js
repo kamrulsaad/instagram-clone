@@ -1,22 +1,55 @@
 const mongoose = require('mongoose')
-const {ObjectId} = mongoose.Schema.Types
+const { ObjectId } = mongoose.Schema.Types
 
 const postScema = new mongoose.Schema({
-    title:{
-        type:String,
-        required: true
+    attribution: String,
+    likes_count: Number,
+    comments: [{
+        username: String,
+        comment: String
+    }],
+    tags: [String],
+    type: String,
+    location: String,
+    filter: String,
+    created_time: String,
+    link: String,
+    images: {
+        low_resolution: {
+            url: String,
+            width: Number,
+            height: Number
+        },
+        thumbnail: {
+            url: String,
+            width: Number,
+            height: Number
+        },
+        standard_resolution: {
+            url: String,
+            width: Number,
+            height: Number
+        }
     },
-    body:{
-      type: String,
-      required: true  
+    users_in_photo: [],
+    caption: {
+        created_time: String,
+        text: String,
+        from: {
+            username: String,
+            profile_picture: String,
+            id: String,
+            full_name: String
+        },
+        id: String
     },
-    photo:{
-        type: String,
-        default: "No Picture Posted"
-    },
-    postedBy: {
-        type: ObjectId,
-        ref:"User"
+    user_has_liked: Boolean,
+    id: String,
+    user: {
+        username: String,
+        profile_picture: String,
+        id: String,
+        full_name: String
     }
 })
 
