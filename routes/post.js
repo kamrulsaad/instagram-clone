@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
-const requireLogin = require('../middleware/requireLogin')
 const Post = mongoose.model("Post")
 
 router.get('/insta_posts', (req, res) => {
