@@ -12,7 +12,7 @@ const StoryContainers = () => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/allUsers", requestOptions)
+        fetch("https://react-social-clone.herokuapp.com/allUsers", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (user) {

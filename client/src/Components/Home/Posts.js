@@ -7,7 +7,7 @@ const Posts = () => {
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/insta_posts')
+        fetch('https://react-social-clone.herokuapp.com/insta_posts')
             .then(res => res.json())
             .then(res => setPosts(res.data.reverse()))
     }, [])

@@ -28,7 +28,7 @@ const Login = () => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/signin", requestOptions)
+        fetch("https://react-social-clone.herokuapp.com/signin", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.error) {

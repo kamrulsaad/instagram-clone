@@ -63,7 +63,7 @@ const Signup = () => {
                         redirect: 'follow'
                     };
 
-                    fetch("http://localhost:5000/signup", requestOptions)
+                    fetch("https://react-social-clone.herokuapp.com/signup", requestOptions)
                         .then(response => response.json())
                         .then(result => {
                             setLoading(false)
