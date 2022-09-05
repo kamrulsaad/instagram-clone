@@ -14,15 +14,15 @@ export const Nav = () => {
 
     return (
         <div className="bg-gray-900 sticky top-0 z-50">
-            <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+            <div className="px-4 py-2 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
                 <div className="relative flex items-center justify-between">
                     <div className="flex items-center">
                         <Link to="/"
                             aria-label="Instagram"
                             title="Instagram"
                             className="inline-flex items-center mr-8">
-                            <img className="w-10" src="assets/logo.png" alt="" />
-                            <span className="ml-2 grand-hotel text-3xl font-bold tracking-wide text-gray-100">
+                            <img className="w-9" src="assets/logo.png" alt="" />
+                            <span className="ml-2 grand-hotel text-2xl font-bold tracking-wide text-gray-100">
                                 Instagram
                             </span>
                         </Link>
@@ -64,7 +64,7 @@ export const Nav = () => {
                                     <li>
                                         <Link
                                             to="/signup"
-                                            className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                            className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                                             aria-label="Sign up"
                                             title="Sign up"
                                         >
@@ -102,12 +102,12 @@ export const Nav = () => {
                                     <div className="flex items-center justify-between mb-4">
                                         <div>
                                             <Link to="/"
-                                                aria-label="Company"
-                                                title="Company"
+                                                aria-label="Instagram"
+                                                title="Instagram"
                                                 className="inline-flex items-center"
                                             >
                                                 <img className="w-10" src="assets/logo.png" alt="" />
-                                                <span className="ml-2 grand-hotel text-2xl font-bold tracking-wide text-gray-800">
+                                                <span className="ml-2 grand-hotel text-xl font-bold tracking-wide text-gray-800">
                                                     Instagram
                                                 </span>
                                             </Link>
@@ -159,7 +159,7 @@ export const Nav = () => {
                                                     <li>
                                                         <Link
                                                             to="/signup"
-                                                            className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                                            className="inline-flex items-center justify-center w-full h-10 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                                                             aria-label="Sign up"
                                                             title="Sign up"
                                                         >
@@ -169,7 +169,7 @@ export const Nav = () => {
                                             }
                                         </ul>
                                     </nav>
-                                    <Link to='/friends' className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md mt-3 bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">Suggested friends</Link>
+                                    {user && <Link to='/friends' className="inline-flex items-center justify-center w-full h-10 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md mt-3 bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">Suggested friends</Link>}
                                 </div>
                             </div>
                         )}

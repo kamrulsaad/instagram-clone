@@ -66,6 +66,7 @@ const Signup = () => {
                     fetch("http://localhost:5000/signup", requestOptions)
                         .then(response => response.json())
                         .then(result => {
+                            setLoading(false)
                             if(result.error){
                                 toast.error(result.error)
                             }
@@ -73,7 +74,6 @@ const Signup = () => {
                                 toast.success(result.message)
                                 navigate('/signin')
                             }
-                            setLoading(false)
                         })
 
 

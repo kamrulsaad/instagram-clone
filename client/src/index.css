@@ -39,3 +39,11 @@
   /* Make the text fill color value transparent so the masked background color comes through */
   -webkit-text-fill-color: transparent;
 }
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(128, 128, 128, 0.362);
+}

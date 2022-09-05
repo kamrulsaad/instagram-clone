@@ -17,8 +17,12 @@ const Info = ({ route }) => {
         fetch("http://localhost:5000/allUsers", requestOptions)
             .then(response => response.json())
             .then(result => {
-                const other_users = result.filter(res => res.username !== user.username)
-                setUsers(other_users)
+                if (user) {
+                    const other_users = result.filter(res => res.username !== user.username)
+                    setUsers(other_users.reverse().slice(0, 5))
+                } else{
+                    setUsers(result.slice(0,5))
+                }
             })
     }, [user])
 
@@ -27,7 +31,7 @@ const Info = ({ route }) => {
             {
                 route && <Nav></Nav>
             }
-            <div className={`max-w-sm sticky top-[100px] ${!route && 'hidden'} mx-auto md:mx-0 md:block w-full my-5 p-4 h-fit md:rounded-lg bg-white border border-slate-300`}>
+            <div className={`max-w-sm sticky top-[76px] ${!route && 'hidden'} mx-auto md:mx-0 md:block w-full my-5 p-4 h-fit md:rounded-lg bg-white border border-slate-300`}>
                 {user && <div className='flex gap-3 items-center'>
                     <img className='w-16 rounded-full object-cover h-16' src={user.profile_picture} alt="" />
                     <div>
