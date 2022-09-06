@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const Post = mongoose.model("Post")
+const FbPost = mongoose.model("FbData")
 
 router.get('/insta_posts', (req, res) => {
     Post.find()
@@ -9,6 +10,16 @@ router.get('/insta_posts', (req, res) => {
         res.json({meta: {
             code: 200
         }, data: posts})
+    })
+    .catch(err => {
+        console.log(err);
+    })
+})
+
+router.get('/fb_posts', (req, res) => {
+    FbPost.findOne()
+    .then(data => {
+        res.json(data)
     })
     .catch(err => {
         console.log(err);

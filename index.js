@@ -17,6 +17,7 @@ mongoose.connection.on('error', (err) => {
 
 require('./models/user')
 require('./models/post')
+require('./models/fb-data')
 
 app.use(express.json())
 app.use(cors())
