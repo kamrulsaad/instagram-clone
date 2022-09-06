@@ -1,5 +1,17 @@
 const mongoose = require('mongoose')
-const { ObjectId } = mongoose.Schema.Types
+
+const imageSchema = new mongoose.Schema({
+    url: String,
+    width: Number,
+    height: Number
+})
+
+const userSchema = new mongoose.Schema({
+    username: String,
+    profile_picture: String,
+    id: String,
+    full_name: String
+})
 
 const postScema = new mongoose.Schema({
     attribution: String,
@@ -15,42 +27,20 @@ const postScema = new mongoose.Schema({
     created_time: String,
     link: String,
     images: {
-        low_resolution: {
-            url: String,
-            width: Number,
-            height: Number
-        },
-        thumbnail: {
-            url: String,
-            width: Number,
-            height: Number
-        },
-        standard_resolution: {
-            url: String,
-            width: Number,
-            height: Number
-        }
+        low_resolution: imageSchema,
+        thumbnail: imageSchema,
+        standard_resolution: imageSchema
     },
     users_in_photo: [],
     caption: {
         created_time: String,
         text: String,
-        from: {
-            username: String,
-            profile_picture: String,
-            id: String,
-            full_name: String
-        },
+        from: userSchema,
         id: String
     },
     user_has_liked: Boolean,
     id: String,
-    user: {
-        username: String,
-        profile_picture: String,
-        id: String,
-        full_name: String
-    }
+    user: userSchema
 })
 
 mongoose.model("Post", postScema)
