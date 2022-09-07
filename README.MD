@@ -29,11 +29,11 @@ Password: 123456
 
 ## Home Page Preview
 
-![Screenshot of the Website HomePage](./src/assets/1.png)
+![Screenshot of the Website HomePage](./assets/1.png)
 
 ## Code Snippet Preview
 
-![Screenshot of the a code snippet](./src/assets/2.png)
+![Screenshot of the a code snippet](./assets/2.png)
 
 ---
 
